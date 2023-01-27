@@ -8,7 +8,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const uri = `mongodb+srv://nathanielmention:${process.env.MONGODB_PASSWORD}@resumeparser.7g6dzmq.mongodb.net/?retryWrites=true&w=majority`;
-
+//connect to db
 mongoose.connect(
   uri,
   { useNewUrlParser: true, useUnifiedTopology: true },
@@ -22,6 +22,11 @@ mongoose.connect(
 );
 
 const app = express();
+
+app.use(express.urlencoded({ extended: true }));
+//set up path for ejs template
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
 
 app.use("/", express.static("public"));
 app.use(fileUpload());
