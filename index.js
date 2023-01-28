@@ -2,6 +2,7 @@ const express = require("express");
 const fileUpload = require("express-fileupload");
 const pdfParse = require("pdf-parse");
 const mongoose = require("mongoose");
+const resumeRoutes = require("./routes/resumeRoutes");
 const fs = require("fs");
 const path = require("path");
 const dotenv = require("dotenv");
@@ -30,8 +31,9 @@ app.set("view engine", "ejs");
 
 app.use("/", express.static("public"));
 app.use(fileUpload());
+app.use(resumeRoutes);
 
-const pdfSchema = new mongoose.Schema({
+/*const pdfSchema = new mongoose.Schema({
   data: {
     type: Buffer,
     required: true,
@@ -65,7 +67,7 @@ app.post("/extract-text", (req, res) => {
     res.send(result.text);
   });
 });
-
+*/
 app.listen(3000, console.log("app listening on 3000"));
 
 /*// Store PDF in MongoDB
