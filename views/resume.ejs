@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
   <head>
     <title>Resume Parser</title>
@@ -29,7 +29,7 @@
           <div class="file-field input-field">
             <div class="btn">
               <span>Browse</span>
-              <input type="file" name="file" />
+              <input id="uploadInp" type="file" name="file" />
             </div>
 
             <div class="file-path-wrapper">
@@ -54,5 +54,13 @@
         </div>
       </form>
     </div>
+    <script>
+      const uploadInp = document.getElementById("uploadInp");
+
+      uploadInp.addEventListener("change", (e) => {
+        console.log(e.target);
+        e.target.files;
+      });
+    </script>
   </body>
-</html>
+</html> -->

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Resume Parser</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/index.css" />
+  </head>
+  <body>
+    <input type="file" id="inpFile" />
+    <button type="button" id="btnUpload">Upload</button>
+    <br />
+    <textarea
+      style="width: 300px; height: 150px"
+      ,
+      placeholder="pdf text"
+      ,
+      id="resultText"
+    ></textarea>
+    <div class="search-wrapper">
+      <label for="search">Parse Resume</label>
+      <input type="search" id="search" data-search />
+    </div>
+    <div class="user-cards" data-user-cards-container></div>
+    <template data-user-template>
+      <div class="card">
+        <div class="header" data-header></div>
+        <div class="body" data-body></div>
+      </div>
+    </template>
+    <script type="text/javascript" src="./scripts/index.js"></script>
+  </body>
+</html>

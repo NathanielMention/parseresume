@@ -5,9 +5,11 @@ const schema = mongoose.Schema;
 const resumeSchema = new schema({
   title: {
     type: String,
+    required: false,
   },
   textContent: {
     type: String,
+    required: false,
   },
   createdAt: {
     type: Date,
@@ -16,6 +18,6 @@ const resumeSchema = new schema({
 });
 
 //create model
-const Resume = mongoose.model("book", resumeSchema);
+const Resume = mongoose.model("resume", resumeSchema);
 
 module.exports = Resume;
