@@ -42,16 +42,16 @@ searchInput.addEventListener("input", (e) => {
   });
 });
 
-fetch("/resume", {
+fetch("/", {
   method: "get",
 })
   .then((res) => res.text())
   .then((data) => {
-    resumes = data.map((resume) => {
-      const card = resumeCardTemplate.content.cloneNode(true).children[0];
-      const body = card.querySelector("[data-body]");
-      body.textContent = resume.text;
-      resumeCardContainer.append(card);
-      return { body: resume.text, element: card };
-    });
+    // resumes = data.map((resume) => {
+    //   const card = resumeCardTemplate.content.cloneNode(true).children[0];
+    //   const body = card.querySelector("[data-body]");
+    //   body.textContent = resume.text;
+    //   resumeCardContainer.append(card);
+    //   return { body: resume.text, element: card };
+    // });
   });

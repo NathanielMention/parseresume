@@ -4,16 +4,16 @@ const pdfParse = require("pdf-parse");
 const router = express.Router();
 
 //end point for search
-router.get("/resume"),
-  (req, res) => {
-    // Retrieve PDF from MongoDB
-    Resume.find()
-      .then((result) => {
-        console.log(result);
-        res.send(result.text);
-      })
-      .catch((err) => console.error(err));
-  };
+router.get("/search", (req, res) => {
+  let data = [];
+  // Retrieve PDF from MongoDB
+  Resume.find()
+    .forEach((data) => data.push(data))
+    .then(() => {
+      res.status(200).json(data);
+    })
+    .catch((err) => console.error(err));
+});
 
 //end point for upload data
 router.post("/extract-text", (req, res) => {
@@ -34,37 +34,5 @@ router.post("/extract-text", (req, res) => {
     res.send("resume uploaded");
   });
 });
-
-// router.post("/resume", upload.single("file"), async (req, res) => {
-//   console.log(req.files);
-//   pdfparse(req.files.file.data).then((data) => {
-//     console.log(data);
-//     //create instance of model
-//     const resume = new Resume({
-//       title: req.files.file.name,
-//       textContent: data.text,
-//     });
-//     //save our model to database
-//     resume
-//       .save()
-//       .then((cho) => {
-//         console.log(cho);
-//         res.status(200).json({
-//           message: "resume uploaded successfully",
-//           uploadedResume: {
-//             name: cho.title,
-//             text: cho.textContent,
-//             _id: cho._id,
-//           },
-//         });
-//       })
-//       .catch((e) => {
-//         // console.log(e)
-//         res.status(500).json({
-//           error: e,
-//         });
-//       });
-//   });
-// });
 
 module.exports = router;
