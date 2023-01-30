@@ -3,12 +3,8 @@ const schema = mongoose.Schema;
 
 //db schema
 const resumeSchema = new schema({
-  title: {
-    type: String,
-    required: false,
-  },
-  textContent: {
-    type: String,
+  text: {
+    type: Object,
     required: false,
   },
   createdAt: {

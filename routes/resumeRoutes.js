@@ -42,6 +42,14 @@ router.post("/extract-text", (req, res) => {
   }
   //parse data from front end
   pdfParse(req.files.pdfFile).then((result) => {
+    //new instance of resume to save to db
+    const resume = new Resume({
+      text: {
+        type: result.text,
+        required: false,
+      },
+    });
+    resume.save();
     res.send(result.text);
   });
 });
