@@ -1,38 +1,20 @@
 const express = require("express");
 const Resume = require("../model/resumeModel");
 const pdfParse = require("pdf-parse");
-const fs = require("fs");
-const multer = require("multer");
-const path = require("path");
 const router = express.Router();
 
-// Config for multer
-// const upload = multer({ dest: "public/files "})
-const multerStorage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "public/");
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  },
-});
-
-//filter files to only allow pdf uploads
-const multerFilter = (req, file, cb) => {
-  if (
-    file.mimetype.split("/")[1] === "pdf" ||
-    file.mimetype.split("/")[1] === "docx"
-  ) {
-    cb(null, true);
-  } else {
-    cb(new Error("Not a document File"), false);
-  }
-};
-
-const upload = multer({
-  storage: multerStorage,
-  fileFilter: multerFilter,
-});
+//end point for search
+router.get("/"),
+  (req, res) => {
+    // Retrieve PDF from MongoDB
+    const data = req.data;
+    Resume.find()
+      .then((result) => {
+        console.log(result);
+        res.send(result.text);
+      })
+      .catch((err) => console.error(err));
+  };
 
 //end point for upload data
 router.post("/extract-text", (req, res) => {
@@ -50,7 +32,7 @@ router.post("/extract-text", (req, res) => {
       },
     });
     resume.save();
-    res.send(result.text);
+    res.send("resume uploaded");
   });
 });
 

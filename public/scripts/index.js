@@ -42,16 +42,17 @@ searchInput.addEventListener("input", (e) => {
   });
 });
 
-fetch("/resumes")
+fetch("/", {
+  method: "get",
+  body: data,
+})
   .then((res) => res.json())
   .then((data) => {
     resumes = data.map((resume) => {
       const card = resumeCardTemplate.content.cloneNode(true).children[0];
-      const header = card.querySelector("[data-header]");
       const body = card.querySelector("[data-body]");
-      header.textContent = resume.name;
-      body.textContent = resume;
+      body.textContent = resume.text;
       resumeCardContainer.append(card);
-      return { name: resume.name, body: resume, element: card };
+      return { body: resume.text, element: card };
     });
   });
