@@ -42,11 +42,10 @@ searchInput.addEventListener("input", (e) => {
   });
 });
 
-fetch("/", {
+fetch("/resume", {
   method: "get",
-  body: data,
 })
-  .then((res) => res.json())
+  .then((res) => res.text())
   .then((data) => {
     resumes = data.map((resume) => {
       const card = resumeCardTemplate.content.cloneNode(true).children[0];

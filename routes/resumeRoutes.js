@@ -4,10 +4,9 @@ const pdfParse = require("pdf-parse");
 const router = express.Router();
 
 //end point for search
-router.get("/"),
+router.get("/resume"),
   (req, res) => {
     // Retrieve PDF from MongoDB
-    const data = req.data;
     Resume.find()
       .then((result) => {
         console.log(result);
