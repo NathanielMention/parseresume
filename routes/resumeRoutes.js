@@ -6,10 +6,10 @@ const router = express.Router();
 //end point for search
 router.get("/search", (req, res) => {
   let data = [];
+
   // Retrieve PDF from MongoDB
   Resume.find()
-    .forEach((data) => data.push(data))
-    .then(() => {
+    .then((data) => {
       res.status(200).json(data);
     })
     .catch((err) => console.error(err));

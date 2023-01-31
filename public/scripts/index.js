@@ -4,10 +4,10 @@ const btnUpload = document.getElementById("btnUpload");
 const resultText = document.getElementById("resultText");
 const resumeCardTemplate = document.querySelector("[data-resume-template]");
 const resumeCardContainer = document.querySelector(
-  "[data-resume-cards-container]"
+  "[data-user-resume-container]"
 );
 const searchInput = document.querySelector("[data-search]");
-
+console.log(resumeCardContainer);
 //handle upload event
 btnUpload.addEventListener("click", () => {
   //build the data
@@ -33,25 +33,27 @@ btnUpload.addEventListener("click", () => {
 let resumes = [];
 
 searchInput.addEventListener("input", (e) => {
+  console.log(resumes);
   //use tolowercase to remove case sensitivity for search bar
   const value = e.target.value.toLowerCase();
   resumes.forEach((resume) => {
-    const isVisible = resume.name.toLowerCase().includes(value);
+    const isVisible = resume.body.toLowerCase().includes(value);
     // hide resume if it doesnt contain key word
     resume.element.classList.toggle("hide", !isVisible);
   });
 });
 
-fetch("/", {
+// get data back from server append to page
+fetch("/search", {
   method: "get",
 })
-  .then((res) => res.text())
+  .then((res) => res.json())
   .then((data) => {
-    // resumes = data.map((resume) => {
-    //   const card = resumeCardTemplate.content.cloneNode(true).children[0];
-    //   const body = card.querySelector("[data-body]");
-    //   body.textContent = resume.text;
-    //   resumeCardContainer.append(card);
-    //   return { body: resume.text, element: card };
-    // });
+    resumes = data.map((resume) => {
+      const card = resumeCardTemplate.content.cloneNode(true).children[0];
+      const body = card.querySelector("[data-body]");
+      body.textContent = resume.text.type;
+      resumeCardContainer.append(card);
+      return { body: resume.text.type, element: card };
+    });
   });
